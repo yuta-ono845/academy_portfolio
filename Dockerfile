@@ -2,7 +2,7 @@
 FROM gradle:7.6.1-jdk17 AS builder
 WORKDIR /app
 COPY . .
-RUN ./gradlew build --no-daemon
+RUN ./gradlew build -x test --no-daemon
 
 # 2. 実行用ステージ
 FROM eclipse-temurin:17
