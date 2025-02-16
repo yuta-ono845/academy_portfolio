@@ -1,9 +1,11 @@
-FROM eclipse-temurin:17
-
+# 1. ビルド用ステージ
+FROM gradle:7.6.1-jdk17 AS builder
 WORKDIR /app
+COPY . .
+RUN ./gradlew build --no-daemon
 
-# JAR ファイルをコンテナにコピー（`build/libs/` の JAR を /app に移動）
-COPY build/libs/spring-0.0.1-SNAPSHOT.jar app.jar
-
-# アプリの実行コマンド
+# 2. 実行用ステージ
+FROM eclipse-temurin:17
+WORKDIR /app
+COPY --from=builder /app/build/libs/spring-0.0.1-SNAPSHOT.jar /app/app.jar
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
