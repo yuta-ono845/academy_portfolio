@@ -10,7 +10,4 @@ databases:
   - type: database
     name: db
     plan: free
-    image: postgres:13.1
-    envVars:
-      - key: SECRET_KEY
-        sync: false
+    user: postgres
