@@ -3,20 +3,14 @@ services:
     name: app
     env: docker
     plan: free
-    build:
-      dockerfilePath: Dockerfile
-      context: .
-    # Dockerfile の CMD/ENTRYPOINT を使用するなら command は不要
-    # command: ["java", "-jar", "/app/app.jar"]
-    # もしDockerfileにEXPOSEしてないなら
-    # healthCheckPath: "/"
-    # など設定
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
 
-  - type: web
+databases:
+  - type: database
     name: db
-    env: docker
     plan: free
-    build:
-      dockerfilePath: Dockerfile.db  # もしdb用Dockerfileがある場合
-      context: .
-    # or if using an official Postgres image, see Render docs
+    image: postgres:13.1
+    envVars:
+      - key: SECRET_KEY
+        sync: false
