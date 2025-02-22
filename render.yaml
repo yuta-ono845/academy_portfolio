@@ -6,8 +6,15 @@ services:
     dockerfilePath: ./Dockerfile
     dockerContext: .
 
+# Exported from Render on 2025-02-22T13:20:43Z
 databases:
-  - type: database
-    name: db
-    plan: free
-    user: postgres
+- name: postgres
+  databaseName: postgres_u11b
+  user: postgres_u11b_user
+  plan: free
+  region: singapore
+  ipAllowList:
+  - source: 0.0.0.0/0
+    description: everywhere
+  postgresMajorVersion: "13"
+version: "1"
