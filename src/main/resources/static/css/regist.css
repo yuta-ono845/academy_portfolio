@@ -1,8 +1,17 @@
- /* ーーーーーーーーーーーーーー　　ヘッダー 　　ーーーーーーーーーーーーーー*/
-  header {
+/*　body全体の設定　*/
+  html,body {
     width: 1440px;
-    height: 120px;
-    justify-content: space-between;  /* 子要素を左右端に配置 */
+    height: 1024px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+/* ーーーーーーーーーーーーーー　　ヘッダー 　　ーーーーーーーーーーーーーー*/
+  header{
+    height:120px;
+    display:flex;
+    justify-content:space-between;  /* 子要素を左右端に配置 */
     align-items: center;
     padding-left: 40px;
     padding-right: 40px;
@@ -10,106 +19,123 @@
   }
   
   /* ヘッダーのロゴ部分 */
-  .header-logo {
-    width: 201px;
-    height: 42px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    font-size: 36px;
-    line-height: 42.19px;
-    letter-spacing: 0;
-    color: black;
+  .header-logo{
+    font-family:'Roboto';
+    font-weight:700;
+    font-size:36px;
+    color: white;
   }
+    /* ヘッダーのログインボタン */
+   .header-btn {
+    padding-top: 16px;
+    padding-right: 40px;
+    padding-bottom: 16px;
+    padding-left: 40px;
+    border-radius: 4px;
+    background-color: white;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+   }
 
-   .header-login {
-        color: black;
-    }
-  
-  
   /* ーーーーーーーーーーーーーー　　メイン 　　ーーーーーーーーーーーーーー */
   .main-contents {
-    max-width: 400px;         /* 画面が広いときは幅を固定 */
-    margin: 40px auto;        /* 上下40px、左右autoで中央寄せ */
-    padding: 0 16px;          /* 横に少し余白 */
-    text-align: center;       /* 中央に配置したい場合 */
+    text-align: center;
+    flex: 1;
   }
   
-  /* メインタイトル（例：ログイン、新規登録など） */
+  /* 新規登録 */
   .main-title {
-    font-size: 24px;          /* タイトルをやや大きめに */
-    margin-bottom: 24px;      /* タイトル下に余白 */
-    font-weight: bold;
-    color: #333;              /* 文字色はお好みで */
+    font-family: 'Roboto';
+    padding-top: 80px;
+    padding-bottom: 76px;
+    margin: 0;
+    line-height: 133%;
+    font-size: 36px;          
+    font-weight: 400;
+    color:#000000BF;
   }
   
   /* フォーム全体を包むクラス */
   .form {
     display: flex;
-    flex-direction: column;   /* 縦に要素を並べる */
-    gap: 16px;                /* 各要素の間隔 */
+    flex-direction: column;  
+    gap: 48px;               
     margin: 0 auto;
     width: 100%;
-    max-width: 400px;         /* 画面が広い場合の最大幅 */
+    max-width: 480px;
   }
   
-  /* 個別のフォームグループ (.form-name, .form-email, .form-pass など) */
   .form-name,
   .form-email,
   .form-pass {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;   /* ラベルを左寄せにする場合 */
+    align-items: flex-start;   
   }
   
-  /* 各フォームグループのラベル */
+  /* 各フォームのラベル */
   .form-name label,
   .form-email label,
   .form-pass label {
-    margin-bottom: 4px;
-    font-weight: bold;
+    display:inline-block;
+    text-align: left;
+    vertical-align: top;
+    height: 12px;
+    margin-bottom: 9px;
+    font-size:12px;
+    color:#0000008A;
+    letter-spacing: 0.15px;
   }
   
   /* 入力欄 */
   .form-name input,
   .form-email input,
   .form-pass input {
+    font-weight: 400;
+    line-height: 19px;
     width: 100%;
-    padding: 8px;
     border: none;
-    border-bottom: 1px solid #ccc; /* 下線のみ */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42); 
     font-size: 16px;
+    padding:0 0 8px 0;
   }
   
   /* ボタン */
-  .login-btn {
-    background-color: #1E3F66; /* ヘッダーと同系統の青 */
+  .register-btn {
+    background-color: #1B5678; 
     color: #FFFFFF;
-    border: none;
-    border-radius: 4px;        /* 角の丸み */
-    padding: 12px 16px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;               /* 横幅100%にして中央で大きめ表示 */
-    max-width: 200px;          /* 必要に応じて最大幅を設定 */
-    margin: 8px auto;          /* 上下8px、左右autoで中央寄せ */
-  }
-  
-  /* ボタンのホバー時の色変化 */
-  .register-btn:hover,
-  .login-btn:hover {
-    background-color: #14426A; /* 少し濃い色に */
+    border-radius: 4px;
+    border: 0;     
+    padding: 16px 80px;
+    font-size: 18px;
+    margin: 0 auto;    
+    width: 232px;
+    height: 53px;
+    text-align: center;
+    font-family: 'Roboto';
+    line-height: 100%;
   }
   
   /* ーーーーーーーーーーーーーー　　フッター　　ーーーーーーーーーーーーーー */
   footer {
+    height: 40px;
     text-align: center;
-    padding: 16px 0;
-    background-color: #F5F5F5; /* うっすらグレーなど */
-    color: #333;
+    background-color: #1B5678; 
+    color: white;
   }
-  
-  /* フッターのロゴなど */
+
+  /* フッターのロゴ */
   .footer-logo {
-    font-weight: bold;
+    display: inline;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 40px;
+
+  }
+
+  /*--------------------- error  ----------------------- */
+  .error {
+    color: red;
   }
