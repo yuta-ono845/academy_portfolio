@@ -1,0 +1,141 @@
+/*　body全体の設定　*/
+  html,body {
+    width: 1440px;
+    height: 1024px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+/* ーーーーーーーーーーーーーー　　ヘッダー 　　ーーーーーーーーーーーーーー*/
+  header{
+    height:120px;
+    display:flex;
+    justify-content:space-between;  /* 子要素を左右端に配置 */
+    align-items: center;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: #1B5678;    
+  }
+  
+  /* ヘッダーのロゴ部分 */
+  .header-logo{
+    font-family:'Roboto';
+    font-weight:700;
+    font-size:36px;
+    color: white;
+  }
+    /* ヘッダーのログインボタン */
+   .header-btn {
+    padding-top: 16px;
+    padding-right: 40px;
+    padding-bottom: 16px;
+    padding-left: 40px;
+    border-radius: 4px;
+    background-color: white;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+   }
+
+  /* ーーーーーーーーーーーーーー　　メイン 　　ーーーーーーーーーーーーーー */
+  .main-contents {
+    text-align: center;
+    flex: 1;
+  }
+  
+  /* 新規登録 */
+  .main-title {
+    font-family: 'Roboto';
+    padding-top: 80px;
+    padding-bottom: 76px;
+    margin: 0;
+    line-height: 133%;
+    font-size: 36px;          
+    font-weight: 400;
+    color:#000000BF;
+  }
+  
+  /* フォーム全体を包むクラス */
+  .form {
+    display: flex;
+    flex-direction: column;  
+    gap: 48px;               
+    margin: 0 auto;
+    width: 100%;
+    max-width: 480px;
+  }
+  
+  .form-name,
+  .form-email,
+  .form-pass {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;   
+  }
+  
+  /* 各フォームのラベル */
+  .form-name label,
+  .form-email label,
+  .form-pass label {
+    display:inline-block;
+    text-align: left;
+    vertical-align: top;
+    height: 12px;
+    margin-bottom: 9px;
+    font-size:12px;
+    color:#0000008A;
+    letter-spacing: 0.15px;
+  }
+  
+  /* 入力欄 */
+  .form-name input,
+  .form-email input,
+  .form-pass input {
+    font-weight: 400;
+    line-height: 19px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42); 
+    font-size: 16px;
+    padding:0 0 8px 0;
+  }
+  
+  /* ボタン */
+  .register-btn {
+    background-color: #1B5678; 
+    color: #FFFFFF;
+    border-radius: 4px;
+    border: 0;     
+    padding: 16px 80px;
+    font-size: 18px;
+    margin: 0 auto;    
+    width: 232px;
+    height: 53px;
+    text-align: center;
+    font-family: 'Roboto';
+    line-height: 100%;
+  }
+  
+  /* ーーーーーーーーーーーーーー　　フッター　　ーーーーーーーーーーーーーー */
+  footer {
+    height: 40px;
+    text-align: center;
+    background-color: #1B5678; 
+    color: white;
+  }
+
+  /* フッターのロゴ */
+  .footer-logo {
+    display: inline;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 40px;
+
+  }
+
+  /*--------------------- error  ----------------------- */
+  .error {
+    color: red;
+  }

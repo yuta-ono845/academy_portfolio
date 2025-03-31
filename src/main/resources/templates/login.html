@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ログイン</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <link rel="stylesheet" href="..//static/css/login.css" />
+</head>
+<body>
+
+    <!-- ヘッダー -->
+    <header class="site-header">
+        <h1>My Portfolio</h1>
+    </header>
+
+    <!-- メインログインフォーム -->
+    <main class="login-container">
+        <h2>ログイン</h2>
+
+        <!-- エラーメッセージ（flash対応） -->
+        <div th:if="${param.error}" class="error-message">
+            <p th:text="${param.error}"></p>
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="username">メールアドレス</label>
+                <input type="text" id="username" name="username" placeholder="メールアドレスを入力" required />
+            </div>
+
+            <div class="form-group">
+                <label for="password">パスワード</label>
+                <input type="password" id="password" name="password" placeholder="パスワードを入力" required />
+            </div>
+
+            <div class="form-actions">
+                <button type="submit">ログインする</button>
+            </div>
+        </form>
+
+        <div class="register-link">
+            <a th:href="@{/register}">
+                <button>新規登録する</button>
+            </a>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="site-footer">
+        <p>portfolio site</p>
+    </footer>
+
+</body>
+</html>
