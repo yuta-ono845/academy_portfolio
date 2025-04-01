@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.spring.springbootapplication.entity.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserMapper {
@@ -12,4 +13,7 @@ public interface UserMapper {
             "VALUES (#{name}, #{email}, #{password}, #{createdAt}, #{updatedAt})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insertUser(User user);
+
+    @Select("SELECT * FROM users WHERE email = #{email}")
+    public User findByEmail(String email);
 }

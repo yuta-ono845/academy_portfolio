@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="/css/top.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">My Portfolio</h1>
+    <form action="/logout" method="post" class="logout-form">
+      <button type="submit">ログアウト</button>
+    </form>
+  </header>
+
+  <main class="container">
+    <!-- 自己紹介セクション -->
+    <section class="profile-section">
+      <div class="profile-content">
+        <img src="/img/profile.jpg" alt="プロフィール画像" class="profile-image">
+        <div class="profile-text">
+          <h2>自己紹介</h2>
+          <hr>
+          <p>
+            自分の自己紹介文章が入ります。自分の自己紹介文章が入ります。
+            自分の自己紹介文章が入ります。自分の自己紹介文章が入ります。
+          </p>
+          <a href="/profile/edit"><button>自己紹介を編集する</button></a>
+        </div>
+      </div>
+      <p class="profile-name">アカデミー花子</p>
+    </section>
+
+    <!-- 学習チャートセクション -->
+    <section class="chart-section">
+      <h2>学習チャート</h2>
+      <hr>
+      <a href="/chart/edit"><button>編集する</button></a>
+      <div class="chart-container">
+        <canvas id="studyChart" width="800" height="400"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>portfolio site</p>
+  </footer>
+
+  <script>
+    const ctx = document.getElementById('studyChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['先々月', '先月', '今月'],
+        datasets: [
+          {
+            label: 'バックエンド',
+            backgroundColor: 'pink',
+            data: [30, 30, 10],
+          },
+          {
+            label: 'フロントエンド',
+            backgroundColor: 'peachpuff',
+            data: [5, 10, 10],
+          },
+          {
+            label: 'インフラ',
+            backgroundColor: 'moccasin',
+            data: [48, 48, 48],
+          }
+        ]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Chart.js Bar Chart'
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
