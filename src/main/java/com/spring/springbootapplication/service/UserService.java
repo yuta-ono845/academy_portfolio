@@ -33,4 +33,8 @@ public class UserService {
         // MyBatisのMapperを呼び出して、ユーザー情報をデータベースに登録
         userMapper.insertUser(userEntity);
     }
+
+    public com.spring.springbootapplication.entity.User findByEmail(String email) {
+        return userMapper.findByEmail(email);
+    }
 }

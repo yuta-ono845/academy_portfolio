@@ -1,4 +1,4 @@
-package com.spring.springbootapplication;
+package com.spring.springbootapplication.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,17 +39,6 @@ class RegisterController {
     }
     // エラーがなければ、サービス層に処理を委譲してユーザー情報をDBに保存する
     userService.registerUser(user);
-        return "redirect:/login";
+        return "redirect:/top";
 }
-}
-
-// ログイン画面用のコントローラー（package-private）
-@Controller
-class LoginController {
-
-    // GET: ログイン画面の表示
-    @GetMapping("/login")
-    public String showLoginForm() {
-        return "login"; // login.html をレンダリング
-    }
 }

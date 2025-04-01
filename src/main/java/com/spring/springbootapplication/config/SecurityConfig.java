@@ -14,7 +14,7 @@ public class SecurityConfig {
             // リクエストの認可設定
             .authorizeHttpRequests(authorize -> authorize
                 // /register と静的リソースへのアクセスは認証不要にする
-                .requestMatchers("/login", "/register",  "/css/**", "/js/**", "/images/**").permitAll()
+                .requestMatchers("/login", "/register",  "/css/**", "/js/**", "/images/**", "/top/**").permitAll()
                 // それ以外のリクエストは認証が必要
                 .anyRequest().authenticated()
             )
