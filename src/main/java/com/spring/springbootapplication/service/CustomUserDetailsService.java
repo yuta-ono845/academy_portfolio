@@ -1,7 +1,8 @@
-package com.spring.springbootapplication.security;
+package com.spring.springbootapplication.service;
 
 import com.spring.springbootapplication.entity.User;
-import com.spring.springbootapplication.service.UserService;
+import com.spring.springbootapplication.security.LoginUser;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

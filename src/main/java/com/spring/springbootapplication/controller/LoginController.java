@@ -1,30 +1,48 @@
 package com.spring.springbootapplication.controller;
 
-import jakarta.servlet.http.HttpServletRequest; //セッション情報取得に使用
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
+import org.springframework.web.servlet.FlashMap;
+import org.springframework.web.servlet.FlashMapManager;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class LoginController {
 
-    @GetMapping("/login-error")
-    public String handleLoginError(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        // セッションからエラーメッセージを取得
-        Object error = request.getSession().getAttribute("loginError");
+    @GetMapping("/login")
+    public String showLoginForm(HttpServletRequest request, HttpServletResponse response) {
+        // handlerでFlashmapを作成しようとしたが、Securityの処理はDispatcherServletより前に行われるため、リクエスト情報格納に失敗。
+        // そのため、controllerでFlashMapを作成することにした
+        // クエリパラメータが "error=true" のときだけ処理する
+        if ("true".equals(request.getParameter("error"))) {
+            // FlashMap を生成
+            FlashMap flashMap = new FlashMap();
+            //FlashMapという箱にエラーメッセージを格納
+            flashMap.put("loginError", "メールアドレス、もしくはパスワードが間違っています");
 
-        // Flash属性に変換して /login に渡す
-        if (error != null) {
-            redirectAttributes.addFlashAttribute("errorMessage", error.toString());
-            request.getSession().removeAttribute("loginError"); // セッションからは削除
+            // FlashMapManager（FlashMapの管理システム）を取得
+            FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request);
+            if (flashMapManager != null) {
+                //FlashMapに格納された情報を保存(リクエスト紐付ける処理、情報の格納とは少し違う模様)
+                flashMapManager.saveOutputFlashMap(flashMap, request, response);
+            }
+            // loginにリダイレクト
+            return "redirect:/login";
         }
 
-        // Flash属性付きで /login にリダイレクト
-        return "redirect:/login";
-    }
+        // inputFlashMapにrequest内のflashMapの情報を格納
+        Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
+        // inputFlashMapがnullでないandキー名がloginErrorの場合、
+        if (inputFlashMap != null && inputFlashMap.containsKey("loginError")) {
+            //setAtttributeでリクエストスコープにエラーメッセージを格納
+            request.setAttribute("loginError", inputFlashMap.get("loginError"));
+        }
 
-    @GetMapping("/login")
-    public String showLoginForm() {
-        return "login"; // login.html にエラーメッセージを表示する処理は Thymeleaf 側に任せる
+        return "login";
     }
 }
