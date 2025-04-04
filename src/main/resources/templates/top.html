@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>My Portfolio</title>
   <link rel="stylesheet" href="/css/top.css">
+  <!--htmlプレビュー用のリンク-->
+  <th:block th:remove="all"><!--th:blockはthymeleafだけ読み込ませないようにするため-->
+     <link rel="stylesheet" href="../static/css/top.css">
+  </th:block>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -21,9 +25,11 @@
       <div class="profile-content">
         <!-- 画像がある場合だけ表示される -->
         <!--!#strings.isEmpty(profileImage)は空文字を判定してくれる-->
+        <!--
         <img th:if="${profileImage != '/uploads/default_profile.jpg'}"
         th:src="@{${profileImage}}"
-        alt="プロフィール画像" class="profile-img" /> <!--altは画像を表示できなかった時に表示する文章を指定する-->
+        alt="プロフィール画像" class="profile-img" />--> 
+        <!--altは画像を表示できなかった時に表示する文章を指定する-->
 
         <!-- 画像がない場合だけ表示される（グレー背景） -->
         <div th:if="${profileImage == '/uploads/default_profile.jpg'}"
@@ -31,7 +37,6 @@
 
         <div class="profile-text">
           <h2>自己紹介</h2>
-          <hr>
           <p>
             自分の自己紹介文章が入ります。
           </p>
@@ -39,13 +44,15 @@
         </div>
       </div>
       <p class="profile-name">アカデミー花子</p>
+
+      <div>
+        <h2>学習チャート</h2>
+        <a href="/chart/edit"><button>編集する</button></a>
+      </div>
     </section>
 
     <!-- 学習チャートセクション -->
     <section class="chart-section">
-      <h2>学習チャート</h2>
-      <hr>
-      <a href="/chart/edit"><button>編集する</button></a>
       <div class="chart-container">
         <canvas id="studyChart" width="800" height="400"></canvas>
       </div>

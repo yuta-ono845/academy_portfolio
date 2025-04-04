@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <title>sign in</title>
   <link th:href="@{/css/regist.css}" rel="stylesheet">
-  <link href="../static/css/regist.css" rel="stylesheet">
+  <th:block th:remove="all"><!--th:blockはthymeleafだけ読み込ませないようにするため-->
+     <link href="../static/css/regist.css" rel="stylesheet">
+  </th:block>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body> 
