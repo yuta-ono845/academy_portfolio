@@ -10,7 +10,7 @@ import java.util.Collections;
 public class LoginUser implements UserDetails {
 
     //ここにDBから取り出したuser情報を入れてspringが読める形にする
-    private final User user;
+    private final User user; // この情報はTopページ表示の際に利用しています。変更を加える際はご注意ください。
 
     public LoginUser(User user) {
         this.user = user;

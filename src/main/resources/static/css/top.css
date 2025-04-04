@@ -55,6 +55,13 @@ body {
     border-radius: 50%;
     object-fit: cover;
   }
+
+  .gray-placeholder {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #ccc;
+  }
   
   .profile-text {
     max-width: 500px;

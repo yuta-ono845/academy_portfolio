@@ -50,8 +50,12 @@ public class SecurityConfig {
                 .failureUrl("/login?error=true") 
                 .permitAll()
             )
-            // ログアウトも認証不要にする
+            //　ログアウト関連の設定
             .logout(logout -> logout
+                .logoutUrl("/logout")// /logout に POST するとログアウト処理を実行
+                .logoutSuccessUrl("/login")  // ログアウト完了後、/login にリダイレクト
+                .invalidateHttpSession(true) // サーバー側セッション（ログイン情報など）を破棄
+                .deleteCookies("JSESSIONID") // ブラウザ側のセッションIDクッキーを削除
                 .permitAll()
             );
         return http.build();

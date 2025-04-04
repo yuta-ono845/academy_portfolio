@@ -79,6 +79,7 @@ body {
     font-size: 12px;
     font-weight: 400;
     line-height: 12px;
+    display: block;
     margin-bottom: 9.5px;
     letter-spacing: 0.15px;
     color: #0000008A;
@@ -95,15 +96,19 @@ body {
 /* ボタン共通 */
 button {
     background-color: #1B5678;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 16px;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 400px;
     cursor: pointer;
-    width: 100%;
-    margin-bottom: 15px;
+    border:none;
+    width: 268px;
+    height: 53px;
     transition: background-color 0.3s;
     border-radius: 4px;
+}
+
+.form-actions {
+    margin-bottom: 48px;
 }
 
 button:hover {
