@@ -15,8 +15,12 @@ public class TopController {
     public String showTopPage(@AuthenticationPrincipal LoginUser loginUser, Model model) { // @AuthenticationPrincipalで認証されたuser情報を取得
         User user = loginUser.getUser();
         String profileImage = user.getProfileImage();
+        String userName = user.getName(); 
+        String bio = user.getBio();
 
         model.addAttribute("profileImage", profileImage);
+        model.addAttribute("userName", userName);
+        model.addAttribute("bio", bio);
         return "top";
     }
 }
