@@ -14,6 +14,6 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insertUser(User user);
 
-    @Select("SELECT * FROM users WHERE email = #{email}")
+    @Select("SELECT id, name, email, password, profile_image AS profileImage, bio FROM users WHERE email = #{email}")
     public User findByEmail(String email);
 }

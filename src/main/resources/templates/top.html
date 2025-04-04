@@ -9,7 +9,8 @@
 <body>
   <header class="header">
     <h1 class="title">My Portfolio</h1>
-    <form action="/logout" method="post" class="logout-form">
+    <form th:action="@{/logout}" method="post" class="logout-form">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
       <button type="submit">ログアウト</button>
     </form>
   </header>
@@ -18,13 +19,21 @@
     <!-- 自己紹介セクション -->
     <section class="profile-section">
       <div class="profile-content">
-        <img src="/img/profile.jpg" alt="プロフィール画像" class="profile-image">
+        <!-- 画像がある場合だけ表示される -->
+        <!--!#strings.isEmpty(profileImage)は空文字を判定してくれる-->
+        <img th:if="${profileImage != '/uploads/default_profile.jpg'}"
+        th:src="@{${profileImage}}"
+        alt="プロフィール画像" class="profile-img" /> <!--altは画像を表示できなかった時に表示する文章を指定する-->
+
+        <!-- 画像がない場合だけ表示される（グレー背景） -->
+        <div th:if="${profileImage == '/uploads/default_profile.jpg'}"
+        class="profile-img gray-placeholder"></div>
+
         <div class="profile-text">
           <h2>自己紹介</h2>
           <hr>
           <p>
-            自分の自己紹介文章が入ります。自分の自己紹介文章が入ります。
-            自分の自己紹介文章が入ります。自分の自己紹介文章が入ります。
+            自分の自己紹介文章が入ります。
           </p>
           <a href="/profile/edit"><button>自己紹介を編集する</button></a>
         </div>

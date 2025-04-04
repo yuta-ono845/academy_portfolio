@@ -20,27 +20,19 @@ public class LoginController {
         // そのため、controllerでFlashMapを作成することにした
         // クエリパラメータが "error=true" のときだけ処理する
         if ("true".equals(request.getParameter("error"))) {
-            // FlashMap を生成
-            FlashMap flashMap = new FlashMap();
-            //FlashMapという箱にエラーメッセージを格納
-            flashMap.put("loginError", "メールアドレス、もしくはパスワードが間違っています");
+            FlashMap flashMap = new FlashMap(); // FlashMap を生成
+            flashMap.put("loginError", "メールアドレス、もしくはパスワードが間違っています"); //FlashMapという箱にエラーメッセージを格納
 
-            // FlashMapManager（FlashMapの管理システム）を取得
-            FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request);
+            FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request); // FlashMapManager（FlashMapの管理システム）を取得
             if (flashMapManager != null) {
-                //FlashMapに格納された情報を保存(リクエスト紐付ける処理、情報の格納とは少し違う模様)
-                flashMapManager.saveOutputFlashMap(flashMap, request, response);
+                flashMapManager.saveOutputFlashMap(flashMap, request, response); //FlashMapに格納された情報を保存(リクエスト紐付ける処理、情報の格納とは少し違う模様)
             }
-            // loginにリダイレクト
-            return "redirect:/login";
+            return "redirect:/login"; // loginにリダイレクト
         }
 
-        // inputFlashMapにrequest内のflashMapの情報を格納
-        Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
-        // inputFlashMapがnullでないandキー名がloginErrorの場合、
-        if (inputFlashMap != null && inputFlashMap.containsKey("loginError")) {
-            //setAtttributeでリクエストスコープにエラーメッセージを格納
-            request.setAttribute("loginError", inputFlashMap.get("loginError"));
+        Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request); // inputFlashMapにrequest内のflashMapの情報を格納
+        if (inputFlashMap != null && inputFlashMap.containsKey("loginError")){  // inputFlashMapがnullでないandキー名がloginErrorの場合、
+            request.setAttribute("loginError", inputFlashMap.get("loginError")); //setAtttributeでリクエストスコープにエラーメッセージを格納
         }
 
         return "login";
