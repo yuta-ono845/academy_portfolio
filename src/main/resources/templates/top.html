@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>My Portfolio</title>
   <link rel="stylesheet" href="/css/top.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Noto+Sans+JP&display=swap" rel="stylesheet">
   <!--htmlプレビュー用のリンク-->
   <th:block th:remove="all"><!--th:blockはthymeleafだけ読み込ませないようにするため-->
      <link rel="stylesheet" href="../static/css/top.css">
@@ -25,29 +26,30 @@
       <div class="profile-content">
         <!-- 画像がある場合だけ表示される -->
         <!--!#strings.isEmpty(profileImage)は空文字を判定してくれる-->
-        <!--
         <img th:if="${profileImage != '/uploads/default_profile.jpg'}"
         th:src="@{${profileImage}}"
-        alt="プロフィール画像" class="profile-img" />--> 
+        alt="プロフィール画像" class="profile-img" />
         <!--altは画像を表示できなかった時に表示する文章を指定する-->
 
         <!-- 画像がない場合だけ表示される（グレー背景） -->
-        <div th:if="${profileImage == '/uploads/default_profile.jpg'}"
-        class="profile-img gray-placeholder"></div>
+        <div th:if="${profileImage == '/uploads/default_profile.jpg'}"class="profile-img gray-placeholder">
+            <p class="profile-name" th:text="${userName}"></p>
+        </div>
 
         <div class="profile-text">
           <h2>自己紹介</h2>
-          <p>
+          <p th:text="${bio} ?: ''">
             自分の自己紹介文章が入ります。自分の自己紹介文章が入ります。自分の自己紹介文章が入ります。
           </p>
-          <a href="/profile/edit"><button>自己紹介を編集する</button></a>
+          <a th:href="@{/profile/edit}"><button>自己紹介を編集する</button></a>
         </div>
       </div>
-      <p class="profile-name">アカデミー花子</p>
 
-      <div>
+      <div class="study-chart">
         <h2>学習チャート</h2>
-        <a href="/chart/edit"><button>編集する</button></a>
+        <a href="/chart/edit">
+            <button>編集する</button>
+        </a>
       </div>
     </section>
 

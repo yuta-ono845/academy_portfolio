@@ -41,17 +41,30 @@ body {
     display: flex;
     height:360px;
     align-items: center;
-    margin:80px auto 10px auto;
+    margin:80px auto 120px auto;
     gap: 80px;
-    overflow: hidden;
   }
   
-  .profile-image {
+  .profile-img {
     width: 360px;
     height: 360px;
     border-radius: 50%;
     object-fit: cover;
+    position: relative;
   }
+
+  .profile-img p {
+    height: 57px;
+    position: absolute;
+    top:100%;
+    left: 50%;
+    margin-top: 10px;
+    transform: translateX(-50%); 
+    font-size: 20px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
 
   .gray-placeholder {
     width: 360px;
@@ -70,25 +83,31 @@ body {
   
   .profile-text h2 {
     font-size: 24px;
-    margin:0 280px 32px 0;
+    margin:52px 280px 32px 0;
     font-size: 36px;
     padding-bottom:16px;
     border-bottom: 2px solid rgba(0, 0, 0, 0.5);
   }
   
   .profile-text p {
+    font-size: 18px;
     margin: 0;
     min-height: 81px;
+    max-height: 133px;
   }
   
   .profile-text button {
-    background-color: #194766;
+    border-radius: 4px;
+    margin-top: 32px;
+    background-color: #1B5678;
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-weight: bold;
+    padding: 16px 40px;
+    font-weight: 400;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
   }
   
   .profile-name {
@@ -96,9 +115,37 @@ body {
     font-size: 18px;
     font-weight: bold;
   }
+
+  .study-chart {
+    margin-bottom: 46px;
+  }
+
+  .study-chart h2 {
+    font-family: Roboto;
+    font-weight: 700;
+    font-size: 36px;
+    padding-bottom:16px;
+    margin:0;
+  }
+    
+  .study-chart button {
+    background-color: #1B5678;
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    font-weight: 400;
+    font-size: 18px;
+    border-radius: 4px;
+    margin-top: 40px;
+    cursor: pointer;
+  }
   
   .chart-section {
     text-align: center;
+  }
+
+  .chart-container {
+    margin: 0 166px 81.5px 193px;
   }
   
   .chart-section h2 {
@@ -113,26 +160,18 @@ body {
     width: 200px;
   }
   
-  .chart-section button {
-    background-color: #194766;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-weight: bold;
-    border-radius: 4px;
-    margin-bottom: 2rem;
-    cursor: pointer;
-  }
-  
-  .chart-container {
-    max-width: 800px;
-    margin: auto;
-  }
   
   .footer {
-    background-color: #194766;
+    font-size: 18px;
+    font-weight: 400;
+    height: 40px;
+    background-color: #1B5678;
     color: white;
-    text-align: center;
-    padding: 1rem;
-    margin-top: 4rem;
+    display: flex;
+    align-items: center;   /* ← 垂直方向（上下）の中央揃え */
+    justify-content: center;
+  }
+
+  .footer p {
+    margin: 0;
   }
