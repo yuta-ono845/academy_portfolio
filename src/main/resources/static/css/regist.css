@@ -1,8 +1,6 @@
 /*　body全体の設定　*/
   html,body {
-    width: 1440px;
     height: 1024px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
   }
@@ -82,7 +80,7 @@
     text-align: left;
     vertical-align: top;
     height: 12px;
-    margin-bottom: 9px;
+    margin-bottom: 4px;
     font-size:12px;
     color:#0000008A;
     letter-spacing: 0.15px;
@@ -98,7 +96,7 @@
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.42); 
     font-size: 16px;
-    padding:0 0 8px 0;
+    padding:6px 0;
   }
   
   /* ボタン */

@@ -10,7 +10,6 @@ body {
     font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
-    max-width: 1440px;
     margin: 0 auto;
 }
 
@@ -59,14 +58,22 @@ body {
     font-weight: 400;
     margin-bottom: 80px;
     color: #000000BF;
+    position: relative;
 }
 
 /* エラーメッセージ */
 .error {
-    background-color: #f8d7da;
-    color: #842029;
+    background-color: #f8c4ce82;
+    color: #9e1d5d;
     font-size: 16px;
-    text-align: center;
+    text-align: left;
+    position: absolute;
+    top: calc( 265px);
+    width:480px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #f06d7885;
+    /* font-family: 'Roboto', 'Noto Sans JP', sans-serif; */
 }
 
 /* ラベルとインプット */
@@ -80,7 +87,7 @@ body {
     font-weight: 400;
     line-height: 12px;
     display: block;
-    margin-bottom: 9.5px;
+    margin-bottom: 3px;
     letter-spacing: 0.15px;
     color: #0000008A;
 }
@@ -90,7 +97,7 @@ body {
     font-size: 16px;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.42);
-    padding-bottom: 6.5px;
+    padding: 6.5px 0;
 }
 
 /* ボタン共通 */

@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <title>ログイン</title>
     <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Noto+Sans+JP&display=swap" rel="stylesheet">
     <!-- htmlプレビュー機能がcss先を認証するために、thymeleaf用とは別途リンク先を記載-->
-    <link rel="stylesheet" href="../static/css/login.css" />
+    <th:block th:remove="all"><!--th:blockはthymeleafだけ読み込ませないようにするため-->
+        <link rel="stylesheet" href="../static/css/login.css" />
+    </th:block>
 </head>
 <body>
 
@@ -20,7 +23,7 @@
 
         <!-- エラーメッセージ（flash対応） -->
         <div th:if="${loginError}" class="error">
-            <p th:text="${loginError}"></p>
+            <p th:text="${loginError}">メールアドレス、もしくはパスワードが間違っています</p>
         </div>
 
         <form th:action="@{/login}" method="post">
