@@ -2,13 +2,50 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>自己紹介編集</title>
+  <title>学習情報編集</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" th:href="@{/css/profile_edit.css}">
   <th:block th:remove="all">
     <link rel="stylesheet" href="../static/css/profile_edit.css">
   </th:block>
 </head>
 <body>
-  <h1 class="fall-text">自己紹介編集画面へようこそ</h1>
+  <header>
+    <div class="header-title">MY Portfolio</div>
+    <div class="logout">
+      <a th:href="@{/logout}">ログアウト</a>
+    </div>
+  </header>
+  <main>
+    <form th:action="@{/profile/edit}" method="post" enctype="multipart/form-data" th:object="${user}">
+      <div class="main-title">自己紹介を編集する</div>
+      <div class="main-bio">
+        <label for="bio">自己紹介文</label>
+        <textarea id="bio" name="bio" th:field="*{bio}" rows="5" cols="40"></textarea>
+        <div class="error" th:if="${#fields.hasErrors('bio')}">自己紹介は50文字以上200文字以内で入力してください</div>
+      </div>
+      <div class="main-img">
+        <label class="img-label" for="image">アバター画像</label>
+        <br>
+        <label for="image" class="custom-file-label">画像ファイルを添付する</label>
+        <span id="file-name" style="margin-left: 10px;"></span>
+        <br>
+        <input type="file" id="image" name="image" accept="image/*" onchange="showFileName()" style="display: none;" />
+        <script>
+          function showFileName() {
+            const input = document.getElementById('image');
+            const fileName = input.files.length > 0 ? input.files[0].name : "";
+            document.getElementById('file-name').textContent = fileName;
+          }
+        </script>
+      </div>
+      <div class="main-btn">
+        <button type="submit">自己紹介を確定する</button>
+      </div>
+    </form>
+  </main>
+  <footer>
+    <p>portfolio site</p>
+  </footer>
 </body>
 </html>

@@ -37,4 +37,8 @@ public class UserService {
     public com.spring.springbootapplication.entity.User findByEmail(String email) {
         return userMapper.findByEmail(email);
     }
+
+    public void updateUserProfile(Long userId, String bio, String profileImage) {
+        userMapper.updateProfileById(userId, bio, profileImage);
+    }
 }

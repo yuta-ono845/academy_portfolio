@@ -5,11 +5,12 @@ services:
       dockerfile: Dockerfile
     working_dir: /app
     ports:
-      - 8082:8082
-      - 5050:5050
+      - 8083:8082
+      - 5052:5051
     tty: true
     volumes:
       - ./:/app
+      - ./uploads:/uploads 
     command: sleep infinity
     depends_on:
       - db
@@ -29,3 +30,10 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+    volumes:
+      - ./uploads:/uploads
+      - db-data:/var/lib/postgresql/data
+  
+volumes:
+  db-data:

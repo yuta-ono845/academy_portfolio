@@ -26,9 +26,7 @@
       <div class="profile-content">
         <!-- 画像がある場合だけ表示される -->
         <!--!#strings.isEmpty(profileImage)は空文字を判定してくれる-->
-        <img th:if="${profileImage != '/uploads/default_profile.jpg'}"
-        th:src="@{${profileImage}}"
-        alt="プロフィール画像" class="profile-img" />
+        <img th:if="${profileImage != '/uploads/default_profile.jpg'}" th:src="@{${profileImage} + '?v=' + ${#dates.createNow().getTime()}}" class="profile-img" />
         <!--altは画像を表示できなかった時に表示する文章を指定する-->
 
         <!-- 画像がない場合だけ表示される（グレー背景） -->
