@@ -4,7 +4,9 @@ import org.apache.ibatis.annotations.Mapper;
 import com.spring.springbootapplication.entity.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface UserMapper {
@@ -16,4 +18,7 @@ public interface UserMapper {
 
     @Select("SELECT id, name, email, password, profile_image AS profileImage, bio FROM users WHERE email = #{email}")
     public User findByEmail(String email);
+
+    @Update("UPDATE users SET bio = #{bio}, profile_image = #{profileImage}, updated_at = NOW() WHERE id = #{id}")
+    void updateProfileById(@Param("id") Long id, @Param("bio") String bio, @Param("profileImage") String profileImage);
 }

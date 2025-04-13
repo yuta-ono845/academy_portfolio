@@ -5,22 +5,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import com.spring.springbootapplication.entity.User;
+import com.spring.springbootapplication.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.spring.springbootapplication.security.LoginUser;
 
 @Controller
 public class TopController {
 
-    @GetMapping("/top")
-    public String showTopPage(@AuthenticationPrincipal LoginUser loginUser, Model model) { // @AuthenticationPrincipalで認証されたuser情報を取得
-        User user = loginUser.getUser();
-        String profileImage = user.getProfileImage();
-        String userName = user.getName(); 
-        String bio = user.getBio();
+    @Autowired
+    private UserService userService;
 
-        model.addAttribute("profileImage", profileImage);
-        model.addAttribute("userName", userName);
-        model.addAttribute("bio", bio);
+    @GetMapping("/top")
+    public String showTopPage(Model model, @AuthenticationPrincipal LoginUser loginUser) {
+        User updatedUser = userService.findByEmail(loginUser.getUsername());
+        model.addAttribute("userName", updatedUser.getName());
+        model.addAttribute("bio", updatedUser.getBio());
+        model.addAttribute("profileImage", updatedUser.getProfileImage());
         return "top";
-    }
+}
 }

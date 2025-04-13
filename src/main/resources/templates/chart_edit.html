@@ -9,6 +9,32 @@
   </th:block>
 </head>
 <body>
-  <h1 class="animated-heading">学習情報編集画面へようこそ</h1>
+  <header>
+    <div class="header-title">MY Portfolio</div>
+    <div class="logout">
+      <a th:href="@{/logout}">ログアウト</a>
+    </div>
+  </header>
+  <main>
+    <form th:action="@{/profile/edit}" method="post" enctype="multipart/form-data" th:object="${user}">
+      <div class="main-title">自己紹介を編集する</div>
+      <div class="main-bio">
+        <label for="bio">自己紹介文</label>
+        <textarea id="bio" name="bio" th:field="*{bio}" rows="5" cols="40"></textarea>
+        <div class="error" th:if="${#fields.hasErrors('bio')}">自己紹介は50文字以上200文字以内で入力してください</div>
+      </div>
+      <div class="main-img">
+        <label for="image">アバター画像</label>
+        <input type="file" id="image" name="image" accept="image/*" onchange="showFileName()" />
+        <span id="file-name"></span>
+      </div>
+      <div class="main-btn">
+        <button type="submit">自己紹介を確定する</button>
+      </div>
+    </form>
+  </main>
+  <footer>
+    <p>portfolio site</p>
+  </footer>
 </body>
 </html>
