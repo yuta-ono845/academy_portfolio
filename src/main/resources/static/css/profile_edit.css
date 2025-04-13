@@ -115,6 +115,11 @@ textarea {
   background: #1B5678;
 }
 
+.logout a {
+  color: black;           
+  text-decoration: none;    
+}
+
 .main-btn button {
   color:white;
   background: #1B5678;
