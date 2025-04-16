@@ -16,9 +16,9 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insertUser(User user);
 
-    @Select("SELECT id, name, email, password, profile_image AS profileImage, bio FROM users WHERE email = #{email}")
+    @Select("SELECT id, name, email, password, profile_image AS profileImage, profile_image_name AS profileImageName, bio FROM users WHERE email = #{email}")
     public User findByEmail(String email);
 
-    @Update("UPDATE users SET bio = #{bio}, profile_image = #{profileImage}, updated_at = NOW() WHERE id = #{id}")
-    void updateProfileById(@Param("id") Long id, @Param("bio") String bio, @Param("profileImage") String profileImage);
+    @Update("UPDATE users SET bio = #{bio}, profile_image = #{profileImage}, profile_image_name = #{profileImageName}, updated_at = NOW() WHERE id = #{id}")
+    void updateProfileById(@Param("id") Long id, @Param("bio") String bio, @Param("profileImage") String profileImage, @Param("profileImageName") String profileImageName);
 }

@@ -11,6 +11,7 @@ public class User {
     private String bio;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String profileImageName;
 
     public User() {}
 
@@ -76,5 +77,13 @@ public class User {
   
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getProfileImageName() {
+        return profileImageName;
+    }
+    
+    public void setProfileImageName(String profileImageName) {
+        this.profileImageName = profileImageName;
     }
 }

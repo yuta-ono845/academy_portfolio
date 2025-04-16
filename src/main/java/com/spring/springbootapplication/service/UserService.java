@@ -38,7 +38,7 @@ public class UserService {
         return userMapper.findByEmail(email);
     }
 
-    public void updateUserProfile(Long userId, String bio, String profileImage) {
-        userMapper.updateProfileById(userId, bio, profileImage);
+    public void updateUserProfile(Long id, String bio, String profileImage, String profileImageName) {
+        userMapper.updateProfileById(id, bio, profileImage, profileImageName);
     }
 }

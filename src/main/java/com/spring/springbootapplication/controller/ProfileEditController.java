@@ -41,6 +41,7 @@ public class ProfileEditController {
         UserBioUpdateDto dto = new UserBioUpdateDto();
         dto.setBio(currentUser.getBio());
         dto.setProfileImage(currentUser.getProfileImage());
+        dto.setProfileImageName(currentUser.getProfileImageName()); // ← ファイル名のセットを追加
     
         // 画面に渡す
         model.addAttribute("user", dto);
@@ -63,32 +64,38 @@ public class ProfileEditController {
             }
 
             if (!image.isEmpty()) {
-            try {
-                // ログイン中のユーザーの email を取得し、ファイル名に使用
-                String email = loginUser.getUsername();
-                String sanitizedEmail = email.replace("@", "_at_").replace(".", "_");
+                try {
+                    // ログイン中のユーザーの email を取得し、ファイル名に使用
+                    String email = loginUser.getUsername();
+                    String sanitizedEmail = email.replace("@", "_at_").replace(".", "_");
 
-                // ディレクトリを作成
-                String uploadDirStr = "/tmp/uploads/" + sanitizedEmail;
-                Path uploadDir = Paths.get(uploadDirStr);
-                if (!Files.exists(uploadDir)) {
-                    Files.createDirectories(uploadDir);
+                    // ディレクトリを作成
+                    String uploadDirStr = "/tmp/uploads/" + sanitizedEmail;
+                    Path uploadDir = Paths.get(uploadDirStr);
+                    if (!Files.exists(uploadDir)) {
+                        Files.createDirectories(uploadDir);
+                    }
+
+                    Path filePath = uploadDir.resolve("profile.png");
+                    Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+                    // DB用パスをDTOに格納
+                    user.setProfileImage("/img/uploads/" + sanitizedEmail + "/profile.png");
+                    user.setProfileImageName(image.getOriginalFilename()); 
+
+                    System.out.println("画像保存成功: " + filePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return "profile_edit";
                 }
-
-                Path filePath = uploadDir.resolve("profile.png");
-                Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-                // DB用パスをDTOに格納
-                user.setProfileImage("/img/uploads/" + sanitizedEmail + "/profile.png");
-
-                System.out.println("画像保存成功: " + filePath);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "profile_edit";
+            }else {
+                // 画像が空 ⇒ 既存の画像パスを維持
+                User currentUser = userService.findByEmail(loginUser.getUsername());
+                user.setProfileImage(currentUser.getProfileImage());
+                user.setProfileImageName(currentUser.getProfileImageName()); 
             }
-        }
 
-            userService.updateUserProfile(loginUser.getUser().getId(), user.getBio(), user.getProfileImage());
+            userService.updateUserProfile(loginUser.getUser().getId(), user.getBio(), user.getProfileImage(), user.getProfileImageName());
 
             return "redirect:/top";
         }

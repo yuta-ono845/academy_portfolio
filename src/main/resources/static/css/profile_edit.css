@@ -10,10 +10,16 @@ header {
   text-align: center;
 }
 
+#file-name {
+  margin-left: 10px;
+}
+
 .header-title {
   font-family: Roboto;
   font-weight: 700;
   font-size: 36px;
+  text-decoration: none;
+  color: white;
 }
 
 .logout {
@@ -58,6 +64,7 @@ main {
   letter-spacing: 0.15px;
   color: #000000DE;
   border-bottom: 1px solid #000000;
+  resize: none;
 }
 
 .error {
@@ -113,6 +120,7 @@ textarea {
   height: 53px;
   border-radius: 4px;
   background: #1B5678;
+  cursor: pointer;
 }
 
 .logout-button {
@@ -131,6 +139,7 @@ textarea {
   font-size: 18px;
   border: none;
   box-shadow: none;
+  cursor: pointer;
 }
 
 footer {
