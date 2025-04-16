@@ -9,6 +9,7 @@ public class UserBioUpdateDto {
     private String bio;
     
     private String profileImage;
+    private String profileImageName;
 
     // getter / setter
     public String getProfileImage() {
@@ -17,6 +18,14 @@ public class UserBioUpdateDto {
     
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
+    }
+    
+    public String getProfileImageName() {
+        return profileImageName;
+    }
+    
+    public void setProfileImageName(String profileImageName) {
+        this.profileImageName = profileImageName;
     }
 
     public String getBio() {

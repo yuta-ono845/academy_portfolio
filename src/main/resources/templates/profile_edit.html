@@ -11,7 +11,7 @@
 </head>
 <body>
   <header>
-    <div class="header-title">MY Portfolio</div>
+    <a th:href="@{/top}" class="header-title">MY Portfolio</a>
     <form th:action="@{/logout}" method="post" class="logout">
       <button type="submit" class="logout-button">ログアウト</button>
     </form>
@@ -28,7 +28,9 @@
         <label class="img-label" for="image">アバター画像</label>
         <br>
         <label for="image" class="custom-file-label">画像ファイルを添付する</label>
-        <span id="file-name" style="margin-left: 10px;"></span>
+        <span id="file-name"
+          th:text="${user.profileImageName != null and !user.profileImageName.contains('default_profile.jpg') ? user.profileImageName : ''}">
+        </span>
         <br>
         <input type="file" id="image" name="image" accept="image/*" onchange="showFileName()" style="display: none;" />
         <script>
