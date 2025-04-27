@@ -10,29 +10,151 @@
 </head>
 <body>
   <header>
-    <div class="header-title">MY Portfolio</div>
-    <div class="logout">
-      <a th:href="@{/logout}">ログアウト</a>
+    <div class="header-title">
+      <a th:href="@{/top}" style="color: inherit; text-decoration: none;">My Portfolio</a>
     </div>
-  </header>
-  <main>
-    <form th:action="@{/profile/edit}" method="post" enctype="multipart/form-data" th:object="${user}">
-      <div class="main-title">自己紹介を編集する</div>
-      <div class="main-bio">
-        <label for="bio">自己紹介文</label>
-        <textarea id="bio" name="bio" th:field="*{bio}" rows="5" cols="40"></textarea>
-        <div class="error" th:if="${#fields.hasErrors('bio')}">自己紹介は50文字以上200文字以内で入力してください</div>
-      </div>
-      <div class="main-img">
-        <label for="image">アバター画像</label>
-        <input type="file" id="image" name="image" accept="image/*" onchange="showFileName()" />
-        <span id="file-name"></span>
-      </div>
-      <div class="main-btn">
-        <button type="submit">自己紹介を確定する</button>
-      </div>
+    <form th:action="@{/logout}" method="post" class="logout">
+      <button type="submit">ログアウト</button>
     </form>
+  </header>
+
+  <main>
+    <div class="month-select">
+      <form method="get" th:action="@{/chart/edit}">
+        <select name="month" onchange="this.form.submit()">
+          <option th:each="m : ${months}"
+                  th:value="${m}"
+                  th:text="${m + '月'}"
+                  th:selected="${m == currentMonth}">
+          </option>
+        </select>
+      </form>
+    </div>
+
+    <!-- バックエンド -->
+    <section class="category-section">
+      <div class="category-header">
+        <h2>バックエンド</h2>
+        <button class="add-button">項目を追加する</button>
+      </div>
+      <table>
+        <colgroup>
+          <col style="width:240px">
+          <col style="width:240px">
+          <col style="width:200px">
+          <col style="width:200px">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>項目名</th>
+            <th>学習時間</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="item : ${backendItems}" th:if="${item.itemName}">
+            <td th:text="${item.itemName}">Java</td>
+            <td>
+              <input type="number"
+                      th:name="'minutes_' + ${item.id}"
+                      min="0" max="1440" step="1"
+                      th:value="${item.minutes}" /> 
+            </td>
+            <td>
+              <button class="save-button">学習時間を保存する</button>
+            </td>
+            <td>
+              <button class="delete-button">削除する</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- フロントエンド -->
+    <section class="category-section">
+      <div class="category-header">
+        <h2>フロントエンド</h2>
+        <button class="add-button">項目を追加する</button>
+      </div>
+      <table>
+        <colgroup>
+          <col style="width:240px">
+          <col style="width:240px">
+          <col style="width:200px">
+          <col style="width:200px">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>項目名</th>
+            <th>学習時間</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="item : ${frontendItems}" th:if="${item.itemName}">
+            <td th:text="${item.itemName}">Java</td>
+            <td>
+              <input type="number"
+                      th:name="'minutes_' + ${item.id}"
+                      min="0" max="1440" step="1"
+                      th:value="${item.minutes}" /> 
+            </td>
+            <td>
+              <button class="save-button">学習時間を保存する</button>
+            </td>
+            <td>
+              <button class="delete-button">削除する</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- インフラ -->
+    <section class="category-section">
+      <div class="category-header">
+        <h2>インフラ</h2>
+        <button class="add-button">項目を追加する</button>
+      </div>
+      <table>
+        <colgroup>
+          <col style="width:240px">
+          <col style="width:240px">
+          <col style="width:200px">
+          <col style="width:200px">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>項目名</th>
+            <th>学習時間</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="item : ${infraItems}" th:if="${item.itemName}">
+            <td th:text="${item.itemName}">Java</td>
+            <td>
+              <input type="number"
+                      th:name="'minutes_' + ${item.id}"
+                      min="0" max="1440" step="1"
+                      th:value="${item.minutes}" /> 
+            </td>
+            <td>
+              <button class="save-button">学習時間を保存する</button>
+            </td>
+            <td>
+              <button class="delete-button">削除する</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
   </main>
+
   <footer>
     <p>portfolio site</p>
   </footer>
