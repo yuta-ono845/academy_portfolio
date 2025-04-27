@@ -1,25 +1,239 @@
-.animated-heading {
-    font-size: 2rem;
-    text-align: center;
-    animation: fancyJumpFade 1.5s ease-out forwards;
-    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  
-  @keyframes fancyJumpFade {
-    0% {
-      opacity: 0;
-      transform: translateY(50px) scale(0.9);
-    }
-    50% {
-      opacity: 0.8;
-      transform: translateY(-10px) scale(1.1);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
+/* 共通設定 */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+header {
+  height: 120px;
+  background-color: #1B5678;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.header-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  color: #FFFFFF;
+}
+
+.logout button {
+  display: inline-block;
+  padding: 16px 40px;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  color: #000000BF;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+main {
+  width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.month-select {
+  margin-top: 40px;
+}
+
+.month-select select {
+  width: 94px;
+  height: 44px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1; /* 100% = 1 */
+  letter-spacing: 0;
+  color: #000000;
+  background-color: #ffffff;
+  appearance: none; /* 標準の矢印を消す */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23000" viewBox="0 0 16 16"><path d="M1.5 5l6 6 6-6"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px 16px;
+}
+
+.category-section {
+  background-color: #ffffff;
+  border: 1px solid rgba(0,0,0,0.5);
+  border-radius: 8px;
+  padding: 40px;
+}
+
+/* 最後のインフラとfooter間だけ87pxにする */
+.category-section:last-of-type {
+  margin-bottom: 87px;
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.category-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.category-header h2::after {
+  content: '';
+  display: block;
+  width: 240px;
+  border-bottom: 2px solid rgba(0,0,0,0.5);
+  margin-top: 16px;
+}
+
+.add-button {
+  width: 178px;
+  height: 48px;
+  border-radius: 4px;
+  background-color: #1B5678;
+  color: #FFFFFF;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+
+.category-section table {
+  width: 880px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border: 1px solid rgba(0, 0, 0, 0.12); 
+  border-collapse: collapse;
+  box-shadow:
+  0 1px  5px  0   rgba(0,0,0,0.12),
+  0 2px  2px  0   rgba(0,0,0,0.14),
+  0 3px  1px -2px rgba(0,0,0,0.20);
+}
+
+.category-section table th,
+.category-section table td {
+  box-sizing: border-box;
+}
+
+.category-section table thead th {
+  /* 既存の padding や font の指定はそのまま残してください */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09); 
+}
+
+thead th {
+  padding: 16px 16px 16px 40px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  color: rgba(0,0,0,0.87);
+  text-align: left;
+}
+
+.category-section table tbody tr,
+.category-section table tbody td {
+  box-sizing: border-box;
+  height: 73px;   
+}
+
+tbody td {
+  width: 240px;
+  padding: 0px 16px 0px 40px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: 0.15px;
+  vertical-align: middle;
+  color: rgba(0,0,0,0.87);
+  border-bottom: 1px solid #ddd;
+}
+
+tbody input {
+  width: 160px;
+  height: 40px;
+  border: 1px solid rgba(0,0,0,0.23);
+  border-radius: 4px;
+  padding: 0 8px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.15px;
+  color: rgba(0,0,0,0.54);
+  vertical-align: middle;
+  background-color: #ffffff;
+}
+
+.save-button,
+.delete-button {
+  width: 200px; 
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.save-button {
+  box-sizing: border-box;
+  width: 158px;              /* 新しい目標幅 */
+  white-space: nowrap;       /* 改行させない */
+  padding: 8px auto;
+  height: 32px;
+  border: 1px solid #1B5678;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #1B5678;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.delete-button {
+  width: 88px;
+  height: 32px;
+  padding: 8px auto;
+  margin: 20px 40px 20px 32px;
+  border: none;
+  border-radius: 4px;
+  background-color: #EE6969;
+  color: #FFFFFF;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+footer {
+  height: 40px;
+  background-color: #1B5678;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #FFFFFF;
+  margin: 0;
+}
