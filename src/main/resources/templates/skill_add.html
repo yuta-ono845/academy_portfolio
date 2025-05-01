@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>項目追加</title>
+  <link rel="stylesheet" th:href="@{/css/skill_add.css}">
+  <th:block th:remove="all">
+    <link rel="stylesheet" href="../static/css/skill_add.css">
+  </th:block>
+</head>
+<body>
+    <!--#########  header  ########-->
+    <header>
+        <div class="header-title">
+            <a th:href="@{/top}">My Portfolio</a>
+        </div>
+        <form th:action="@{/logout}" method="post" class="logout">
+            <button type="submit">ログアウト</button>
+        </form> 
+    </header>
+    <!--#########  main  ########-->
+    <div class="main-contents">
+        <div class ="main-title">
+            <h1 th:switch="${categoryId}">
+                <span th:case="1">バックエンドに項目を追加</span>
+                <span th:case="2">フロントエンドに項目を追加</span>
+                <span th:case="3">インフラに項目を追加</span>
+            </h1>
+        </div>
+        <!--#########  main-form  ########-->
+        <form class="main-form"  th:object="${learningDataDto}" th:action="@{/skill/add/submit}" method="post">
+            <div class="item-name">
+                <label for="itemName">項目名</label><br>
+                <input id="itemName" th:field="*{itemName}" type="text" placeholder="PHP">
+                <div class="error-message" th:if="${#fields.hasErrors('itemName')}" th:errors="*{itemName}"></div>
+            </div>
+            <div class="study-minutes">
+                <label for="studyMinutes">学習時間</label><br>
+                <input id="studyMinutes" th:field="*{studyMinutes}" type="number" placeholder="30" min="0">
+                <small>分単位で入力してください</small>
+                <div class="error-message" th:if="${#fields.hasErrors('studyMinutes')}" th:errors="*{studyMinutes}"></div>
+            </div>
+            <button type="submit" class="form-button">追加する</button>
+        </form>
+    </div>
+    <!--#########  footer  ########-->
+    <footer>
+        <div class="footer">
+            <p>portfolio site</p>
+        </div>
+    </footer>
+    <!--#########  学習時間、全角→半角へ自動変換するコード　######
+    　　#########   でもtype=numberだから意味なし。アカデミ完了したら改良する########-->
+    <script>
+        // 入力欄のIDが "studyMinutes" の要素に対して、リアルタイム変換を適用
+        document.addEventListener("DOMContentLoaded", function () {
+          const input = document.getElementById("studyMinutes");
+          if (input) {
+            input.addEventListener("input", function () {
+              // 全角数字（０〜９）を半角に変換
+              this.value = this.value.replace(/[０-９]/g, function (s) {
+                return String.fromCharCode(s.charCodeAt(0) - 65248);
+              });
+            });
+          }
+        });
+    </script>
+</body>

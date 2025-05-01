@@ -1,0 +1,98 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+
+
+/****************  header  *******************/
+header {
+    height: 120px;
+    background-color: #1B5678;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+  }
+
+  .header-title a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+  
+  .logout button {
+    display: inline-block;
+    padding: 16px 40px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    color: #000000BF;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    text-decoration: none;
+  }
+
+
+  /****************  main  *******************/
+  .main-contents {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 横方向中央揃え */
+    margin-top: 80px; 
+    gap: 80px;
+  }
+
+  .main-form {
+    min-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .main-form input {
+    width: 100%;
+  }
+
+  .form-button {
+    width: 232px;
+    height: 53px;
+    margin:0 auto;
+    background-color: #1B5678;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    cursor: pointer;
+  }
+
+
+
+  /****************  footer  *******************/
+  footer {
+    height: 40px;
+    background-color: #1B5678;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  footer p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #FFFFFF;
+    margin: 0;
+  }

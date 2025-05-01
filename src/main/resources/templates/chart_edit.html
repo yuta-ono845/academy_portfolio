@@ -35,7 +35,11 @@
     <section class="category-section">
       <div class="category-header">
         <h2>バックエンド</h2>
-        <button class="add-button">項目を追加する</button>
+        <form method="get" th:action="@{/skill/add}">
+          <input type="hidden" name="category" value="1" />
+          <input type="hidden" name="month" th:value="${currentMonth}" />
+          <button type="submit" class="add-button">項目を追加する</button>
+        </form>
       </div>
       <table>
         <colgroup>
@@ -59,7 +63,7 @@
               <input type="number"
                       th:name="'minutes_' + ${item.id}"
                       min="0" max="1440" step="1"
-                      th:value="${item.minutes}" /> 
+                      th:value="${item.studyMinutes}" /> 
             </td>
             <td>
               <button class="save-button">学習時間を保存する</button>
@@ -76,7 +80,11 @@
     <section class="category-section">
       <div class="category-header">
         <h2>フロントエンド</h2>
-        <button class="add-button">項目を追加する</button>
+        <form method="get" th:action="@{/skill/add}">
+          <input type="hidden" name="category" value="2" />
+          <input type="hidden" name="month" th:value="${currentMonth}" />
+          <button type="submit" class="add-button">項目を追加する</button>
+        </form>
       </div>
       <table>
         <colgroup>
@@ -100,7 +108,7 @@
               <input type="number"
                       th:name="'minutes_' + ${item.id}"
                       min="0" max="1440" step="1"
-                      th:value="${item.minutes}" /> 
+                      th:value="${item.studyMinutes}" /> 
             </td>
             <td>
               <button class="save-button">学習時間を保存する</button>
@@ -117,7 +125,11 @@
     <section class="category-section">
       <div class="category-header">
         <h2>インフラ</h2>
-        <button class="add-button">項目を追加する</button>
+        <form method="get" th:action="@{/skill/add}">
+          <input type="hidden" name="category" value="3" />
+          <input type="hidden" name="month" th:value="${currentMonth}" />
+          <button type="submit" class="add-button">項目を追加する</button>
+        </form>
       </div>
       <table>
         <colgroup>
@@ -141,7 +153,7 @@
               <input type="number"
                       th:name="'minutes_' + ${item.id}"
                       min="0" max="1440" step="1"
-                      th:value="${item.minutes}" /> 
+                      th:value="${item.studyMinutes}" /> 
             </td>
             <td>
               <button class="save-button">学習時間を保存する</button>

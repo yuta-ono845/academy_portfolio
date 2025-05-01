@@ -7,5 +7,5 @@ public class LearningDataDto {
     private Integer id;
     private String  categoryName;
     private String  itemName;
-    private Integer minutes;
+    private Integer studyMinutes;
 }
