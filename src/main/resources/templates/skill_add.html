@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>項目追加</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" th:href="@{/css/skill_add.css}">
   <th:block th:remove="all">
     <link rel="stylesheet" href="../static/css/skill_add.css">
@@ -29,6 +30,13 @@
         </div>
         <!--#########  main-form  ########-->
         <form class="main-form"  th:object="${learningDataDto}" th:action="@{/skill/add/submit}" method="post">
+            <!-- 学習月とカテゴリーIDをコントローラーに渡すためにhidenでデータ受け取り、　URL改変対策にエラーメッセージ表示設定-->
+            <input type="hidden" th:field="*{categoryId}" th:value="${categoryId}" />
+            <div class="error-message" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}"></div>
+
+            <input type="hidden" th:field="*{studyMonth}" th:value="${studyMonth}" />
+            <div class="error-message" th:if="${#fields.hasErrors('studyMonth')}" th:errors="*{studyMonth}"></div>
+            <!--ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー-->
             <div class="item-name">
                 <label for="itemName">項目名</label><br>
                 <input id="itemName" th:field="*{itemName}" type="text" placeholder="PHP">
@@ -36,7 +44,7 @@
             </div>
             <div class="study-minutes">
                 <label for="studyMinutes">学習時間</label><br>
-                <input id="studyMinutes" th:field="*{studyMinutes}" type="number" placeholder="30" min="0">
+                <input id="studyMinutes" th:field="*{studyMinutes}" type="number" placeholder="30">
                 <small>分単位で入力してください</small>
                 <div class="error-message" th:if="${#fields.hasErrors('studyMinutes')}" th:errors="*{studyMinutes}"></div>
             </div>
@@ -49,20 +57,17 @@
             <p>portfolio site</p>
         </div>
     </footer>
-    <!--#########  学習時間、全角→半角へ自動変換するコード　######
-    　　#########   でもtype=numberだから意味なし。アカデミ完了したら改良する########-->
-    <script>
-        // 入力欄のIDが "studyMinutes" の要素に対して、リアルタイム変換を適用
-        document.addEventListener("DOMContentLoaded", function () {
-          const input = document.getElementById("studyMinutes");
-          if (input) {
-            input.addEventListener("input", function () {
-              // 全角数字（０〜９）を半角に変換
-              this.value = this.value.replace(/[０-９]/g, function (s) {
-                return String.fromCharCode(s.charCodeAt(0) - 65248);
-              });
-            });
-          }
-        });
-    </script>
+
+    <!--#########  モーダル  ########-->
+    <div th:if="${showModal}" class="modal">
+        <div class="modal-content">
+            <div class="modal-text" th:with="categoryName=${categoryId == 1 ? 'バックエンド' : 
+                                                            categoryId == 2 ? 'フロントエンド' : 
+                                                            categoryId == 3 ? 'インフラ' : '不明'}">
+                <p th:text="${categoryName + 'に' + itemName + 'を'}">{カテゴリー名} に {項目名} を</p>
+                <p th:text="${studyMinutes + '分で追加しました！'}">{学習時間}分で追加しました！</p>
+            </div>
+            <a th:href="@{/chart/edit}" class="modal-button">編集ページに戻る</a>
+        </div>  
+    </div>
 </body>
