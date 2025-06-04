@@ -46,4 +46,9 @@ public class LearningDataService {
         // Mapperのinsertメソッドを呼び出してDBに保存
         learningDataMapper.insert(entity);
     }
+
+    @Transactional
+    public void updateStudyMinutes(Integer id, Integer studyMinutes) {
+        learningDataMapper.updateStudyMinutes(id, studyMinutes);
+    }
 }

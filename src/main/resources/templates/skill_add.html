@@ -67,7 +67,7 @@
                 <p th:text="${categoryName + 'に' + itemName + 'を'}">{カテゴリー名} に {項目名} を</p>
                 <p th:text="${studyMinutes + '分で追加しました！'}">{学習時間}分で追加しました！</p>
             </div>
-            <a th:href="@{/chart/edit}" class="modal-button">編集ページに戻る</a>
+            <a th:href="@{/chart/edit(month=${month})}" class="modal-button">編集ページに戻る</a>
         </div>  
     </div>
 </body>

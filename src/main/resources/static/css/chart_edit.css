@@ -243,3 +243,43 @@ footer p {
   color: #FFFFFF;
   margin: 0;
 }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* 他の要素より前面に */
+  }
+
+  .modal-content {
+    background-color: #FFFFFF;
+    min-width: 640px;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-text p {
+    margin: 0;
+    font-weight: 700;
+    font-size: 18px; 
+  }
+
+  .modal-content a {
+    background-color: #1B5678;
+    color: #FFFFFF;
+    padding: 16px 40px;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 12px;
+    text-decoration: none;
+  }
