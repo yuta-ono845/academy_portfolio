@@ -58,19 +58,25 @@
         </thead>
         <tbody>
           <tr th:each="item : ${backendItems}" th:if="${item.itemName}">
-            <td th:text="${item.itemName}">Java</td>
-            <td>
-              <input type="number"
-                      th:name="'minutes_' + ${item.id}"
-                      min="0" max="1440" step="1"
-                      th:value="${item.studyMinutes}" /> 
-            </td>
-            <td>
-              <button class="save-button">学習時間を保存する</button>
-            </td>
-            <td>
-              <button class="delete-button">削除する</button>
-            </td>
+            <form th:action="@{/skill/update}" method="post">
+              <input type="hidden" name="id" th:value="${item.id}" />
+              <input type="hidden" name="itemName" th:value="${item.itemName}" />
+              <td th:text="${item.itemName}">Java</td>
+              <td>
+                <input type="number"
+                      name="studyMinutes"
+                      th:value="${item.studyMinutes}"
+                      min="0"
+                      required
+                      step="1" />
+              </td>
+              <td>
+                <button type="submit" class="save-button">学習時間を保存する</button>
+              </td>
+            </form>  
+              <td>
+                <button class="delete-button">削除する</button>
+              </td>
           </tr>
         </tbody>
       </table>
@@ -103,19 +109,23 @@
         </thead>
         <tbody>
           <tr th:each="item : ${frontendItems}" th:if="${item.itemName}">
-            <td th:text="${item.itemName}">Java</td>
-            <td>
-              <input type="number"
-                      th:name="'minutes_' + ${item.id}"
-                      min="0" max="1440" step="1"
-                      th:value="${item.studyMinutes}" /> 
-            </td>
-            <td>
-              <button class="save-button">学習時間を保存する</button>
-            </td>
-            <td>
-              <button class="delete-button">削除する</button>
-            </td>
+            <form th:action="@{/skill/update}" method="post">
+              <input type="hidden" name="id" th:value="${item.id}" />
+              <input type="hidden" name="itemName" th:value="${item.itemName}" />
+              <td th:text="${item.itemName}">Java</td>
+              <td>
+                <input type="number"
+                        th:name="'minutes_' + ${item.id}"
+                        min="0" required step="1"
+                        th:value="${item.studyMinutes}" /> 
+              </td>
+              <td>
+                <button class="save-button">学習時間を保存する</button>
+              </td>
+              <td>
+                <button class="delete-button">削除する</button>
+              </td>
+            </form>
           </tr>
         </tbody>
       </table>
@@ -148,16 +158,20 @@
         </thead>
         <tbody>
           <tr th:each="item : ${infraItems}" th:if="${item.itemName}">
-            <td th:text="${item.itemName}">Java</td>
-            <td>
-              <input type="number"
-                      th:name="'minutes_' + ${item.id}"
-                      min="0" max="1440" step="1"
-                      th:value="${item.studyMinutes}" /> 
-            </td>
-            <td>
-              <button class="save-button">学習時間を保存する</button>
-            </td>
+            <form th:action="@{/skill/update}" method="post">
+              <input type="hidden" name="id" th:value="${item.id}" />
+              <input type="hidden" name="itemName" th:value="${item.itemName}" />
+              <td th:text="${item.itemName}">Java</td>
+              <td>
+                <input type="number"
+                        th:name="'minutes_' + ${item.id}"
+                        min="0" required step="1"
+                        th:value="${item.studyMinutes}" /> 
+              </td>
+              <td>
+                <button class="save-button">学習時間を保存する</button>
+              </td>
+            </form>
             <td>
               <button class="delete-button">削除する</button>
             </td>
@@ -170,5 +184,14 @@
   <footer>
     <p>portfolio site</p>
   </footer>
+
+  <div th:if="${updated}" class="modal">
+    <div class="modal-content">
+        <div class="modal-text">
+            <p th:text="${itemName + 'の学習時間を保存しました！'}">{項目名} の学習時間を保存しました！</p>
+        </div>
+        <a th:href="@{/chart/edit}" class="modal-button">編集ページに戻る</a>
+    </div>  
+  </div>
 </body>
 </html>

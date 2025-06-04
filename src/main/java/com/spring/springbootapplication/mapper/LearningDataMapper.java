@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -49,5 +50,14 @@ public interface LearningDataMapper {
         INSERT INTO learning_data (user_id, category_id, item_name, study_minutes, study_month, created_at, updated_at)
         VALUES (#{userId}, #{categoryId}, #{itemName}, #{studyMinutes}, #{studyMonth}, NOW(), NOW())
         """)
-       void insert(LearningData entity);                 
+       void insert(LearningData entity);
+
+    @Update("""
+        update learning_data
+        set study_minutes = #{studyMinutes},
+            updated_at = NOW()
+        where id = #{id}
+        """)
+        void updateStudyMinutes(@Param("id") Integer id,
+                                @Param("studyMinutes") Integer studyMinutes);
 }
