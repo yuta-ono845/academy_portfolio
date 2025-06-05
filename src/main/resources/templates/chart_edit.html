@@ -61,6 +61,7 @@
             <form th:action="@{/skill/update}" method="post">
               <input type="hidden" name="id" th:value="${item.id}" />
               <input type="hidden" name="itemName" th:value="${item.itemName}" />
+              <input type="hidden" name="studyMonth" th:value="${currentMonth}" />
               <td th:text="${item.itemName}">Java</td>
               <td>
                 <input type="number"
@@ -74,9 +75,14 @@
                 <button type="submit" class="save-button">学習時間を保存する</button>
               </td>
             </form>  
+            <form th:action="@{/skill/delete}" method="post">
+              <input type="hidden" name="id" th:value="${item.id}" />
+              <input type="hidden" name="itemName" th:value="${item.itemName}" />
+              <input type="hidden" name="studyMonth" th:value="${currentMonth}" />
               <td>
                 <button class="delete-button">削除する</button>
               </td>
+            </form>
           </tr>
         </tbody>
       </table>
@@ -112,16 +118,24 @@
             <form th:action="@{/skill/update}" method="post">
               <input type="hidden" name="id" th:value="${item.id}" />
               <input type="hidden" name="itemName" th:value="${item.itemName}" />
+              <input type="hidden" name="studyMonth" th:value="${currentMonth}" />
               <td th:text="${item.itemName}">Java</td>
               <td>
                 <input type="number"
-                        th:name="'minutes_' + ${item.id}"
-                        min="0" required step="1"
-                        th:value="${item.studyMinutes}" /> 
+                      name="studyMinutes"
+                      th:value="${item.studyMinutes}"
+                      min="0"
+                      required
+                      step="1" />
               </td>
               <td>
                 <button class="save-button">学習時間を保存する</button>
               </td>
+            </form>
+            <form th:action="@{/skill/delete}" method="post">
+              <input type="hidden" name="id" th:value="${item.id}" />
+              <input type="hidden" name="itemName" th:value="${item.itemName}" />
+              <input type="hidden" name="studyMonth" th:value="${currentMonth}" />
               <td>
                 <button class="delete-button">削除する</button>
               </td>
@@ -161,20 +175,28 @@
             <form th:action="@{/skill/update}" method="post">
               <input type="hidden" name="id" th:value="${item.id}" />
               <input type="hidden" name="itemName" th:value="${item.itemName}" />
+              <input type="hidden" name="studyMonth" th:value="${currentMonth}" />
               <td th:text="${item.itemName}">Java</td>
               <td>
                 <input type="number"
-                        th:name="'minutes_' + ${item.id}"
-                        min="0" required step="1"
-                        th:value="${item.studyMinutes}" /> 
+                      name="studyMinutes"
+                      th:value="${item.studyMinutes}"
+                      min="0"
+                      required
+                      step="1" /> 
               </td>
               <td>
                 <button class="save-button">学習時間を保存する</button>
               </td>
             </form>
-            <td>
-              <button class="delete-button">削除する</button>
-            </td>
+            <form th:action="@{/skill/delete}" method="post">
+              <input type="hidden" name="id" th:value="${item.id}" />
+              <input type="hidden" name="itemName" th:value="${item.itemName}" />
+              <input type="hidden" name="studyMonth" th:value="${currentMonth}" />
+              <td>
+                <button class="delete-button">削除する</button>
+              </td>
+            </form>
           </tr>
         </tbody>
       </table>
@@ -190,8 +212,18 @@
         <div class="modal-text">
             <p th:text="${itemName + 'の学習時間を保存しました！'}">{項目名} の学習時間を保存しました！</p>
         </div>
-        <a th:href="@{/chart/edit}" class="modal-button">編集ページに戻る</a>
+        <a th:href="@{/chart/edit(month=${month})}" class="modal-button">編集ページに戻る</a>
     </div>  
   </div>
+
+    <div th:if="${deleted}" class="modal">
+    <div class="modal-content">
+        <div class="modal-text">
+            <p th:text="${itemName + 'を削除しました！'}">{項目名}を削除しました！</p>
+        </div>
+        <a th:href="@{/chart/edit(month=${month})}" class="modal-button">編集ページに戻る</a>
+    </div>  
+  </div>
+
 </body>
 </html>

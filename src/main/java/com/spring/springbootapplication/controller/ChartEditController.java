@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -75,13 +76,28 @@ public class ChartEditController {
     public String updateStudyMinutes(@RequestParam("id") Integer id,
                                      @RequestParam("studyMinutes") Integer studyMinutes,
                                      @RequestParam("itemName") String itemName,
+                                     @RequestParam("studyMonth") String studyMonth,
                                      RedirectAttributes redirectAttributes) {
 
         learningDataService.updateStudyMinutes(id, studyMinutes);
     
         redirectAttributes.addFlashAttribute("updated", true);
         redirectAttributes.addFlashAttribute("itemName", itemName);
-        return "redirect:/chart/edit";
+        redirectAttributes.addFlashAttribute("month", studyMonth);
+        return "redirect:/chart/edit?month=" + studyMonth;
+    }
 
+    @PostMapping("/skill/delete")
+    public String deleteSkill(@RequestParam("id") Integer id,
+                              @RequestParam("itemName") String itemName,
+                              @RequestParam("studyMonth") String studyMonth,
+                                RedirectAttributes redirectAttributes) {
+
+        learningDataService.deleteSkill(id);
+
+        redirectAttributes.addFlashAttribute("deleted", true);
+        redirectAttributes.addFlashAttribute("itemName", itemName);
+        redirectAttributes.addFlashAttribute("month", studyMonth);
+        return "redirect:/chart/edit?month=" + studyMonth;
     }
 }

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -60,4 +61,10 @@ public interface LearningDataMapper {
         """)
         void updateStudyMinutes(@Param("id") Integer id,
                                 @Param("studyMinutes") Integer studyMinutes);
+
+    @Delete("""
+        DELETE FROM learning_data
+        WHERE id = #{id}
+        """)
+        void deleteSkill(@Param("id") Integer id);
 }
