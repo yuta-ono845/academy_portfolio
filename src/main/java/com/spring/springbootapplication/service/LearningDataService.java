@@ -51,4 +51,9 @@ public class LearningDataService {
     public void updateStudyMinutes(Integer id, Integer studyMinutes) {
         learningDataMapper.updateStudyMinutes(id, studyMinutes);
     }
+
+    @Transactional
+    public void deleteSkill(Integer id) {
+        learningDataMapper.deleteSkill(id);
+    }
 }
