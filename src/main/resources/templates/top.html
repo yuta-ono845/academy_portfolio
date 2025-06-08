@@ -91,7 +91,7 @@
   const ctx = document.getElementById("studyChart").getContext("2d");
   const allValues = chartDatasets.flatMap(dataset => dataset.data);
   const maxValue = Math.max(...allValues);
-  const suggestedMax = Math.ceil(maxValue * 1.1);
+  const suggestedMax = Math.max(100, Math.ceil(maxValue * 1.1));
 
   const createChart = () => {
     return new Chart(ctx, {
