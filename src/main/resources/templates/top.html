@@ -64,39 +64,69 @@
     <p>portfolio site</p>
   </footer>
 
-  <script>
-    const ctx = document.getElementById('studyChart').getContext('2d');
-    new Chart(ctx, {
+  
+  <script th:inline="javascript">
+  const rawLabels = /*[[${chartLabels}]]*/ [];
+  const chartLabels = rawLabels.map(month => {
+    const m = parseInt(month.split("-")[1],10);
+    return `${m}月`;
+  });
+
+  const chartDatasets = /*[[${chartDatasets}]]*/ [];
+  chartDatasets.forEach(dataset => {
+  switch (dataset.label) {
+    case "バックエンド":
+      dataset.backgroundColor = "pink";
+      break;
+    case "フロントエンド":
+      dataset.backgroundColor = "peachpuff";
+      break;
+    case "インフラ":
+      dataset.backgroundColor = "moccasin";
+      break;
+    default:
+      dataset.backgroundColor = "gray";
+  }
+});
+
+  const ctx = document.getElementById("studyChart").getContext("2d");
+  const allValues = chartDatasets.flatMap(dataset => dataset.data);
+  const maxValue = Math.max(...allValues);
+  const suggestedMax = Math.ceil(maxValue * 1.1);
+
+  const createChart = () => {
+    return new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['先々月', '先月', '今月'],
-        datasets: [
-          {
-            label: 'バックエンド',
-            backgroundColor: 'pink',
-            data: [30, 30, 10],
-          },
-          {
-            label: 'フロントエンド',
-            backgroundColor: 'peachpuff',
-            data: [5, 10, 10],
-          },
-          {
-            label: 'インフラ',
-            backgroundColor: 'moccasin',
-            data: [48, 48, 48],
-          }
-        ]
+        labels: chartLabels,
+        datasets: chartDatasets
       },
       options: {
         plugins: {
           title: {
             display: true,
-            text: 'Chart.js Bar Chart'
+            text: "Chart.js Bar Chart",
+            align: "center",
+          }
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            suggestedMax: suggestedMax,
           }
         }
       }
     });
-  </script>
+  };
+
+  let chartInstance = createChart();
+
+  window.addEventListener('resize', () => {
+    chartInstance.resize();
+  });
+</script>
+
 </body>
 </html>
