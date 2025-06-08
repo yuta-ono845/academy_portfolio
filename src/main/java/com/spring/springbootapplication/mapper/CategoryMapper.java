@@ -16,4 +16,7 @@ public interface CategoryMapper {
         ORDER BY id
     """)
     List<Category> findAll();
+
+    @Select("SELECT category_name FROM categories ORDER BY id ASC")
+    List<String> findAllCategoryNames();    
 }
