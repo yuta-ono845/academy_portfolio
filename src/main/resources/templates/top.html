@@ -89,27 +89,41 @@
 });
 
   const ctx = document.getElementById("studyChart").getContext("2d");
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: chartLabels,
-      datasets: chartDatasets
-    },
-    options: {
-      plugins: {
-        title: {
-          display: true,
-          text: "Chart.js Bar Chart"
-        }
+  const allValues = chartDatasets.flatMap(dataset => dataset.data);
+  const maxValue = Math.max(...allValues);
+  const suggestedMax = Math.ceil(maxValue * 1.1);
+
+  const createChart = () => {
+    return new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: chartLabels,
+        datasets: chartDatasets
       },
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
-          suggestedMax: 100
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: "Chart.js Bar Chart",
+            align: "center",
+          }
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            suggestedMax: suggestedMax,
+          }
         }
       }
-    }
+    });
+  };
+
+  let chartInstance = createChart();
+
+  window.addEventListener('resize', () => {
+    chartInstance.resize();
   });
 </script>
 

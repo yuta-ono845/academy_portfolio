@@ -150,7 +150,8 @@ body {
   }
 
   .chart-container {
-    margin: 0 166px 81.5px 193px;
+    margin: 0 12% 81.5px 12%;
+    height:629px;
   }
   
   .chart-section h2 {
