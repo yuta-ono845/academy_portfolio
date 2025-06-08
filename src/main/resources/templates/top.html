@@ -52,7 +52,6 @@
       </div>
     </section>
 
-    <!-- 学習チャートセクション -->
     <section class="chart-section">
       <div class="chart-container">
         <canvas id="studyChart" width="800" height="400"></canvas>
@@ -64,39 +63,55 @@
     <p>portfolio site</p>
   </footer>
 
-  <script>
-    const ctx = document.getElementById('studyChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['先々月', '先月', '今月'],
-        datasets: [
-          {
-            label: 'バックエンド',
-            backgroundColor: 'pink',
-            data: [30, 30, 10],
-          },
-          {
-            label: 'フロントエンド',
-            backgroundColor: 'peachpuff',
-            data: [5, 10, 10],
-          },
-          {
-            label: 'インフラ',
-            backgroundColor: 'moccasin',
-            data: [48, 48, 48],
-          }
-        ]
+  
+  <script th:inline="javascript">
+  const rawLabels = /*[[${chartLabels}]]*/ [];
+  const chartLabels = rawLabels.map(month => {
+    const m = parseInt(month.split("-")[1],10);
+    return `${m}月`;
+  });
+
+  const chartDatasets = /*[[${chartDatasets}]]*/ [];
+  chartDatasets.forEach(dataset => {
+  switch (dataset.label) {
+    case "バックエンド":
+      dataset.backgroundColor = "pink";
+      break;
+    case "フロントエンド":
+      dataset.backgroundColor = "peachpuff";
+      break;
+    case "インフラ":
+      dataset.backgroundColor = "moccasin";
+      break;
+    default:
+      dataset.backgroundColor = "gray";
+  }
+});
+
+  const ctx = document.getElementById("studyChart").getContext("2d");
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: chartLabels,
+      datasets: chartDatasets
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: "Chart.js Bar Chart"
+        }
       },
-      options: {
-        plugins: {
-          title: {
-            display: true,
-            text: 'Chart.js Bar Chart'
-          }
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          suggestedMax: 100
         }
       }
-    });
-  </script>
+    }
+  });
+</script>
+
 </body>
 </html>
