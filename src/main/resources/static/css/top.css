@@ -51,9 +51,11 @@ body {
     border-radius: 50%;
     object-fit: cover;
     position: relative;
+    background-size: cover;
+    background-position: center;
   }
 
-  .profile-img p {
+  .profile-name {
     height: 57px;
     position: absolute;
     top:100%;
@@ -64,6 +66,12 @@ body {
     font-weight: 400;
     display: flex;
     align-items: center;
+    width: 360px;
+    white-space: nowrap;
+    overflow-x: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
   .gray-placeholder {
