@@ -164,6 +164,9 @@ tbody td {
   vertical-align: middle;
   color: rgba(0,0,0,0.87);
   border-bottom: 1px solid #ddd;
+  max-width: 184px;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 .category-section table tbody tr:last-child td {

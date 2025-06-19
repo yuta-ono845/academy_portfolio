@@ -46,15 +46,11 @@ class RegisterController {
     @PostMapping
     public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
-            // バリデーションエラーがある場合、再度フォーム画面に戻す
             return "regist";
         }
 
-        // エラーがなければ、サービス層に処理を委譲してユーザー情報をDBに保存する
         userService.registerUser(user);
 
-        // 新規登録後の認証処理を実行
-        // SpringSecurityが読み込める形にするために、UserDetailsServiceを利用して認証情報を取得
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
         // 認証情報を作成
         Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
