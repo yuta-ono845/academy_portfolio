@@ -34,16 +34,13 @@ public class ProfileEditController {
 
     @GetMapping("/profile/edit")
     public String showProfileEditPage(Model model, @AuthenticationPrincipal LoginUser loginUser) {
-        // ログインユーザーの情報をDBから取得
         User currentUser = userService.findByEmail(loginUser.getUsername());
     
-        // DTOに現在の自己紹介文と画像パスをセット
         UserBioUpdateDto dto = new UserBioUpdateDto();
         dto.setBio(currentUser.getBio());
         dto.setProfileImage(currentUser.getProfileImage());
-        dto.setProfileImageName(currentUser.getProfileImageName()); // ← ファイル名のセットを追加
-    
-        // 画面に渡す
+        dto.setProfileImageName(currentUser.getProfileImageName());
+
         model.addAttribute("user", dto);
         return "profile_edit";
     }
@@ -54,11 +51,33 @@ public class ProfileEditController {
                                   @RequestParam("image") MultipartFile image,
                                   @AuthenticationPrincipal LoginUser loginUser,
                                   Model model) {
+
+            if (!image.isEmpty()) {
+                try {
+                    String email = loginUser.getUsername();
+                    String sanitizedEmail = email.replace("@", "_at_").replace(".", "_");
+
+                    String tempDirStr = "/tmp/uploads/tmp/" + sanitizedEmail;
+                    Path tempDir = Paths.get(tempDirStr);
+                    if (!Files.exists(tempDir)) {
+                        Files.createDirectories(tempDir);
+                    }
+
+                    Path tempFilePath = tempDir.resolve("profile.png");
+
+                    Files.copy(image.getInputStream(), tempFilePath, StandardCopyOption.REPLACE_EXISTING);
+
+                    user.setProfileImage("/img/uploads/tmp/" + sanitizedEmail + "/profile.png");
+                    user.setProfileImageName(image.getOriginalFilename());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    model.addAttribute("user", user);
+                    return "profile_edit"; 
+                }
+            }
+
             if (result.hasErrors()) {
-                System.out.println("▼▼ バリデーションエラーが発生しました ▼▼");
-                result.getAllErrors().forEach(error ->
-                    System.out.println(" - " + error.getDefaultMessage())
-                );
                 model.addAttribute("user", user); 
                 return "profile_edit";
             }

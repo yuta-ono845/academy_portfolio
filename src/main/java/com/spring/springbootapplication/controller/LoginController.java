@@ -16,23 +16,20 @@ public class LoginController {
 
     @GetMapping("/login")
     public String showLoginForm(HttpServletRequest request, HttpServletResponse response) {
-        // handlerでFlashmapを作成しようとしたが、Securityの処理はDispatcherServletより前に行われるため、リクエスト情報格納に失敗。
-        // そのため、controllerでFlashMapを作成することにした
-        // クエリパラメータが "error=true" のときだけ処理する
         if ("true".equals(request.getParameter("error"))) {
-            FlashMap flashMap = new FlashMap(); // FlashMap を生成
-            flashMap.put("loginError", "メールアドレス、もしくはパスワードが間違っています"); //FlashMapという箱にエラーメッセージを格納
+            FlashMap flashMap = new FlashMap();
+            flashMap.put("loginError", "メールアドレス、もしくはパスワードが間違っています"); 
 
-            FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request); // FlashMapManager（FlashMapの管理システム）を取得
+            FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request);
             if (flashMapManager != null) {
-                flashMapManager.saveOutputFlashMap(flashMap, request, response); //FlashMapに格納された情報を保存(リクエスト紐付ける処理、情報の格納とは少し違う模様)
+                flashMapManager.saveOutputFlashMap(flashMap, request, response);
             }
-            return "redirect:/login"; // loginにリダイレクト
+            return "redirect:/login";
         }
 
-        Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request); // inputFlashMapにrequest内のflashMapの情報を格納
-        if (inputFlashMap != null && inputFlashMap.containsKey("loginError")){  // inputFlashMapがnullでないandキー名がloginErrorの場合、
-            request.setAttribute("loginError", inputFlashMap.get("loginError")); //setAtttributeでリクエストスコープにエラーメッセージを格納
+        Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
+        if (inputFlashMap != null && inputFlashMap.containsKey("loginError")){
+            request.setAttribute("loginError", inputFlashMap.get("loginError"));
         }
 
         return "login";

@@ -94,7 +94,7 @@ header {
     height: 53px;
     margin:0 auto;
     background-color: #1B5678;
-    color: rgba(255, 255, 255, 0.7);;
+    color: rgba(255, 255, 255);;
     border: none;
     border-radius: 4px;
     font-weight: 400;
@@ -156,6 +156,7 @@ header {
 
   .modal-text p {
     margin: 0;
+    padding: 0 24px;
     font-weight: 700;
     font-size: 18px; 
   }
