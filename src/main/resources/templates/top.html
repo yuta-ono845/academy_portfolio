@@ -24,9 +24,9 @@
     <!-- 自己紹介セクション -->
     <section class="profile-section">
       <div class="profile-content">
-        <div th:if="${profileImage != '/uploads/default_profile.jpg'}"
-             class="profile-img"
-             th:style="'background-image: url(' + @{${profileImage} + '?v=' + ${#dates.createNow().getTime()}} + ');'">
+        <div th:if="${profileImage != '/uploads/default_profile.jpg'}" class="profile-img-wrapper">
+          <img th:src="@{${profileImage} + '?v=' + ${#dates.createNow().getTime()}}"
+              class="profile-img">
           <p class="profile-name" th:text="${userName}"></p>
         </div>
 

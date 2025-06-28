@@ -22,7 +22,6 @@ public class User {
     private String profileImage;
     private String bio;
 
-    // getterとsetter
     public String getName() {
         return name;
     }

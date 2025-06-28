@@ -273,6 +273,7 @@ footer p {
 
   .modal-text p {
     margin: 0;
+    padding: 0 24px;
     font-weight: 700;
     font-size: 18px; 
   }

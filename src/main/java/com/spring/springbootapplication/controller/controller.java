@@ -23,7 +23,6 @@ import com.spring.springbootapplication.service.UserService;
 import jakarta.validation.Valid;
 
 public class controller {
-    // このクラス自体は直接利用されません。
 }
 
 // 新規登録用のコントローラー（package-private）
@@ -45,6 +44,13 @@ class RegisterController {
     // 新規登録処理を実行する
     @PostMapping
     public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, HttpServletRequest request) {
+
+        if (user.getEmail() != null && !user.getEmail().isBlank() &&
+        user.getEmail().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$") &&
+        userService.findByEmail(user.getEmail()) != null) {
+        bindingResult.rejectValue("email", "duplicate", "このメールアドレスは既に登録されています");
+        }
+
         if (bindingResult.hasErrors()) {
             return "regist";
         }
